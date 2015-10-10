@@ -7,7 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "GameBoyEmulator.h"
+#import "GameGearEmulator.h"
+#import "GameBoyConsoleController.h"
+#import "GameGearConsoleController.h"
 
+
+//桥接模式的简单运用
+//将抽象层次结构从实现中分离出来
 @interface ViewController ()
 
 @end
@@ -16,12 +23,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    GameBoyConsoleController * boyConsole = [GameBoyConsoleController new];
+    boyConsole.emulator = [GameBoyEmulator new];
+    
+    [boyConsole left];
+    
+    GameGearConsoleController * gearConsole = [GameGearConsoleController new];
+    gearConsole.emulator = [GameGearEmulator new];
+    
+    [gearConsole start];
+    
 }
 
 @end
